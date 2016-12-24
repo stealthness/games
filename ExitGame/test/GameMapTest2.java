@@ -18,16 +18,10 @@ public class GameMapTest2 {
 	private static final int SMALL_LONG_WIDTH = 3;
 	private static final int SMALL_LONG_SIZE = 24;
 	
-	GameMap map;
-	GameMap smallLongMap;
+	private GameMap map = new GameMap();
+	private GameMap smallLongMap = new GameMap(SMALL_LONG_LENGTH, SMALL_LONG_WIDTH);
 	
-	final String NEWLINE = System.lineSeparator();
-
-	@BeforeEach
-	public void setUp() throws Exception {
-		map = new GameMap();
-		smallLongMap = new GameMap(SMALL_LONG_LENGTH, SMALL_LONG_WIDTH);
-	}
+	final private String NEWLINE = System.lineSeparator();
 
 	
 	@Test
@@ -64,29 +58,31 @@ public class GameMapTest2 {
 	
 	///  test maps
 	
-	final String map1All = 
-			  ".........."+ NEWLINE+
-			  ".XX.....X."+ NEWLINE+
-			  "..O......."+ NEWLINE+
-			  ".........."+ NEWLINE+
-			  ".........."+ NEWLINE+
-			  ".........."+ NEWLINE+
-			  ".........."+ NEWLINE+
-			  ".........."+ NEWLINE+
-			  ".X......X."+ NEWLINE+
-			  ".........."+ NEWLINE;
+	final private String map1All =
+            new StringBuilder()
+                    .append("..........").append(NEWLINE)
+                    .append(".XX.....X.").append(NEWLINE)
+                    .append("..O.......").append(NEWLINE)
+                    .append("..........").append(NEWLINE)
+                    .append("..........").append(NEWLINE)
+                    .append("..........").append(NEWLINE)
+                    .append("..........").append(NEWLINE)
+                    .append("..........").append(NEWLINE)
+                    .append(".X......X.").append(NEWLINE)
+                    .append("..........").append(NEWLINE).toString();
 	
-	final String map1 = 
-			  "##########"+ NEWLINE
-			+ "##########"+ NEWLINE
-			+ "##########"+ NEWLINE
-			+ "##########"+ NEWLINE
-			+ "##########"+ NEWLINE
-			+ "##########"+ NEWLINE
-			+ "##########"+ NEWLINE
-			+ ".#########"+ NEWLINE
-			+ ".X########"+ NEWLINE
-			+ "b..#######"+ NEWLINE;
+	final private String map1 =
+			new StringBuilder()
+					.append("##########").append(NEWLINE)
+					.append("##########").append(NEWLINE)
+					.append("##########").append(NEWLINE)
+					.append("##########").append(NEWLINE)
+					.append("##########").append(NEWLINE)
+					.append("##########").append(NEWLINE)
+					.append("##########").append(NEWLINE)
+					.append(".#########").append(NEWLINE)
+					.append(".X########").append(NEWLINE)
+					.append("b..#######").append(NEWLINE).toString();
 	
 
 }

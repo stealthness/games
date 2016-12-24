@@ -10,17 +10,12 @@ import org.junit.jupiter.api.BeforeEach;
 public class GameMapTest {
 	
 	
-	GameMap map;
+	GameMap map = new GameMap();;
 	final int STANDARD_SIZE = 100;
 	
 	final String NEWLINE = System.lineSeparator();
 
-	@BeforeEach
-	public void setUp() {
-		map = new GameMap();
-	}
 
-	
 	@Test
 	public void testCreate(){
 		assertEquals(STANDARD_SIZE,map.getSize());		
