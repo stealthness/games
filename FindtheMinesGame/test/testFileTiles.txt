@@ -1,0 +1,15 @@
+tile00e,coord00
+tile00x,coord00,Mark.PLAYER_A,x
+tile00o,coord00,Mark.PLAYER_B,o
+tile11e,coord11
+tile11x,coord11,Mark.PLAYER_A,x
+tile11o,coord11,Mark.PLAYER_B,o
+tile12e,coord12
+tile12x,coord12,Mark.PLAYER_A,x
+tile12o,coord12,Mark.PLAYER_B,o
+tile21e,coord21
+tile21x,coord12,Mark.PLAYER_A,x
+tile21o,coord21,Mark.PLAYER_B,o
+tile22e,coord22
+tile22x,coord22,Mark.PLAYER_A,x
+tile22o,coord22,Mark.PLAYER_B,x

@@ -155,17 +155,31 @@ public class TicTacToe {
 	private int playerMove() {		
 		display.out(R.playerMove);
 		int move = -1;
-		while (move == -1) {
-			try {
-				move = Integer.parseInt(br.readLine());
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-			if ((move < 1 || move > 9) || !board.isEmptyAt(move-1)){		
-				display.out(R.invalidMove);
-				move = -1;
-			}
-		}
+        String line="";
+
+        while (move == -1) {System.out.println("< >");
+            try {
+                line = br.readLine();
+            } catch (Exception e) {
+
+            }
+            if (line == null || line.equals("") ){
+
+                continue;
+            } else {
+                System.out.println("<1>");
+                move = Integer.parseInt(line);
+                System.out.println("<2>");
+                if ((move < 1 || move > 9 || !board.isEmptyAt(move - 1))) {
+                    System.out.println("<3>");
+                    display.out(R.invalidMove);
+                    move = -1;
+                }else{
+                    return move;
+                }
+            }
+        }
+
 		return move-1;
 	}
 

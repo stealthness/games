@@ -5,15 +5,20 @@ import base.tile.GoalTile;
 import base.tile.SolidTile;
 import base.tile.Tile;
 
+import java.util.Arrays;
+
 public class GameMap {
-	
+
+	public static final int DEFAULT_LENGTH = 10;
+	public static final int DEFAULT_WIDTH = 10;
+
 	enum MOVE {UP,DOWN,LEFT,RIGHT};
 	
 
 	Tile[][] gameMap  = new Tile[10][10];
 	BugCharacter bug ;
-	int length = 10;
-	int width = 10;
+	int length = DEFAULT_LENGTH;
+	int width = DEFAULT_WIDTH;
 	
 	public GameMap(int length, int width){
 		this.length = length;
@@ -23,7 +28,7 @@ public class GameMap {
 	}
 
 	private void init() {
-		for (int i =0;i<length;i++){
+        for (int i =0;i<length;i++){
 			for (int j=0;j<width;j++){
 				gameMap[i][j] = new EmptyTile();
 			}
@@ -37,8 +42,10 @@ public class GameMap {
 	public int getSize() {
 		return gameMap.length*gameMap[0].length;
 	}
-	
-	
+
+	/**
+	 * @return a string representation on the GameMap
+	 */
 	public String toString(){
 		StringBuilder output = new StringBuilder();
 		for (int i =0;i<length;i++){
@@ -58,6 +65,7 @@ public class GameMap {
 		return output.toString();
 	}
 
+
 	public String showAll() {		
 		StringBuilder output = new StringBuilder();
 		for (int i =0;i<length;i++){
@@ -71,7 +79,8 @@ public class GameMap {
 		}
 		return output.toString();
 	}
-	
+
+
 	public void createBug(int sightLength){
 		bug = new BugCharacter(-1,-1);
 		bug.setSightLength(sightLength);
@@ -131,14 +140,6 @@ public class GameMap {
 		
 	}
 
-	public int getLength() {
-		return gameMap.length;
-	}
-	
-
-	public int getWidth() {
-		return gameMap[0].length;
-	}
 
 	public void setBlockAT(int i, int j) {
 		gameMap[i][j]= new SolidTile();
@@ -162,6 +163,17 @@ public class GameMap {
 		}else{
 			return gameMap[i][j].getMark();
 		}		
+	}
+
+	// Getter and setter
+
+	public int getLength() {
+		return gameMap.length;
+	}
+
+
+	public int getWidth() {
+		return gameMap[0].length;
 	}
 
 }
