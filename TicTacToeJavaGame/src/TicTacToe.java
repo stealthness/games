@@ -18,42 +18,49 @@ public class TicTacToe {
 	
 	
 	public static void main(String[] args) {
+		System.out.println("start");
 		TicTacToe now = new TicTacToe();
 		if (args != null){
-			now.setMatch(0);
+			System.out.println(args[0]);
+			// set number of AI players to args[1]
+			now.setMatch(Integer.parseInt(args[0]));
 		} else{
-			now.setMatch(1);
+			// set to 2 player
+			now.setMatch(0);
 		}
 
 
 	}
 
+
 	public void setMatch(int numberAIOfPlayers){
 		switch(numberAIOfPlayers){
 			case 0:
-				this.player1 = new Player(1, R.player1Name,false,R.player1Mark);
-				this.player2 = new Player(2,R.player2Name,false,R.player2Mark);
+				this.player1 = new Player(1, R.player1Name, false, R.player1Mark);
+				this.player2 = new Player(2, R.player2Name, false, R.player2Mark);
 				break;
 			case 1:
-				this.player1 = new Player(1,R.player1Name,false,R.player1Mark);
-				this.player2 = new Player(2,R.player2Name,true,R.player2Mark);
+				this.player1 = new Player(1, R.player1Name, false, R.player1Mark);
+				this.player2 = new Player(2, R.player2Name, true, R.player2Mark);
 				break;
 			default:
-				this.player1 = new Player(1,R.player1Name,true,R.player1Mark);
-				this.player2 = new Player(2,R.player2Name,true,R.player2Mark);
+				this.player1 = new Player(1, R.player1Name, true, R.player1Mark);
+				this.player2 = new Player(2, R.player2Name, true, R.player2Mark);
 		}
 
 		startGame();
 	}
 
-
+	/**
+	 * Starts a single match
+	 */
 	public void startMatch() {
-
-		br = new BufferedReader(new InputStreamReader(System.in));
-		display = new Display(System.out);
-		if (antherGame(R.StartQuestion) == n ) {
-			return;
-		}
+//
+//		br = new BufferedReader(new InputStreamReader(System.in));
+//		display = new Display(System.out);
+//		if (antherGame(R.StartQuestion) == n ) {
+//			return;
+//		}
 
 		board = new Board(player1,player2);
 		
