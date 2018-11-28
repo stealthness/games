@@ -26,4 +26,10 @@ public class TicTacToeSpec {
         Assertions.assertThrows(RuntimeException.class,()-> ticTacToe.play(2, 5));
         Assertions.assertThrows(RuntimeException.class,()-> ticTacToe.play(2, 0));
     }
+
+    @Test
+    public void whenOccupiedThenRuntimeException() {
+        ticTacToe.play(2, 1);
+        Assertions.assertThrows(RuntimeException.class,()-> ticTacToe.play(2, 1));
+    }
 }
