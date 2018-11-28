@@ -1,20 +1,23 @@
-import static org.junit.Assert.*;
-import org.junit.*;
-
 import core.Board;
 import core.Coord;
 import core.Mark;
 import core.Tile;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 
 public class TestBoard {
 	
 	Board boardEmpty,boardAllPlayerA;
 	Tile tile00e,tile00x,tile12e,tile12x,tile22e,tile22o,tile22x;
-	Coord coord00,coord12,coord22;
+	private Coord coord00,coord12,coord22;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		boardEmpty = new Board();
 		coord00 = new Coord(0,0);
 		coord12 = new Coord(1,2);
@@ -49,7 +52,9 @@ public class TestBoard {
 	
 	@Test
 	public void testFindTileAt(){
+		assertNotNull(boardEmpty);
 		Tile tile = boardEmpty.findTileAt(coord00);
+		assertNotNull(tile);
   		assertEqualTiles(tile00e,tile);
 		assertNotEqualTiles(tile00x,tile);
 		tile = boardEmpty.findTileAt(coord12);
@@ -59,6 +64,7 @@ public class TestBoard {
 	
 	@Test 
 	public void testSetPlayerAt(){
+		System.out.println(boardEmpty.toString());
 		setPlayerAtTest(boardEmpty,Mark.PLAYER_A,coord00,tile00e,tile00x);
 		setPlayerAtTest(boardEmpty,Mark.PLAYER_A,coord12,tile12e,tile12x);
 		setPlayerAtTest(boardEmpty,Mark.PLAYER_B,coord22,tile22e,tile22o);

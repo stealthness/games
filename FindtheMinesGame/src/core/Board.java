@@ -18,18 +18,18 @@ public class Board {
 	}
 	
 	public Tile findTileAt(Coord coord){
-		return tiles.stream()
-				.filter(tile ->tile.getCoord().equals(coord))
-				.findFirst()
-				.orElse(null);
+//		return tiles.stream()
+//				.filter(tile ->tile.getCoord().equals(coord))
+//				.findFirst()
+//				.orElse(null);
 
 
-/*		for (Tile tile :tiles){
+		for (Tile tile :tiles){
 			if(tile.getCoord().getX()==coord.getX() && tile.getCoord().getY()==coord.getY()){
 				return tile;
 			}
 		}
-		return null;*/
+		return null;
 	}
 
 	public int size() {
@@ -44,6 +44,22 @@ public class Board {
 			}
 		}
 		
+	}
+
+	public String toString(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("board");
+		for (int x = 0 ; x<=MAX_X;x++){
+			for (int y = 0 ; y<=MAX_Y;y++){
+				Tile tile = findTileAt(new Coord(x,y));
+				if (tile != null){
+					sb.append(tile.toString());
+				}
+
+			}
+		}
+
+		return sb.toString();
 	}
 
 }

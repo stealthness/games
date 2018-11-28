@@ -1,10 +1,11 @@
-import org.junit.jupiter.api.Test;
+import base.BugCharacter;
+import org.junit.Test;
 import res.DIR;
 import res.ORDER;
-import base.BugCharacter;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class BugTest {
 	

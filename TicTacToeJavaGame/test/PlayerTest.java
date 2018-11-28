@@ -5,13 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerTest {
 
 	private Player player1 = new Player(1, "Amy", false, 'x');
-	private Player player2 = new Player(2, "Bob", true, 'o');
-	private Player player3 = new Player(1, "Amy", true, 'x');
-	private Player player5 = new Player(2, "Bob", false, 'o');
+	private Player player4 = new Player(1, "Amy", false, 'o');
 	private Player player7 = new Player(1, "Amy", false, 'o');
+
+	private Player player3 = new Player(1, "Amy", true, 'x');
+	private Player player2 = new Player(2, "Bob", true, 'o');
+	private Player player5 = new Player(2, "Bob", false, 'o');
 	private Player player6 = new Player(2, "Bob", true, 'x');
-	private Player player4 = new Player(1, "Amy", false, 'x');
-	private Player player8 = new Player(2, "Bob", true, 'o');
+	private Player player8 = new Player(2, "Bob", true, 'x');
 	private Player playerNone = new Player(0, "none");;
 
 	@Test
