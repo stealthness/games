@@ -5,6 +5,10 @@ package tictactoe.tddjava;
  */
 public class TicTacToe {
 
+    private final char X = 'X';
+    private final char O = 'O';
+    char nextPlayer = X;
+
     private Character[][] board = {
             {'\0', '\0', '\0'},
             {'\0', '\0', '\0'},
@@ -23,7 +27,12 @@ public class TicTacToe {
             throw new RuntimeException("Box is occupied");
         }else{
             board[row-1][col-1] = 'X';
+            switchPlayer();
         }
+    }
+
+    private void switchPlayer() {
+        nextPlayer = (nextPlayer()==X)?O:X;
     }
 
     private void  checkAxis(int x){
@@ -32,4 +41,7 @@ public class TicTacToe {
         }
     }
 
+    public char nextPlayer() {
+        return nextPlayer;
+    }
 }
