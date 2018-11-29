@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,12 +11,17 @@ public class TestBoard {
     SnakeGame sg;
 
 
+    @BeforeEach
+    public void setUp(){
+        sg = new SnakeGame(new int[] {5,5});
+    }
+
+
 
     @Test
     public void testEmptyBoardOFSize5x5isCreatedCorrectly(){
         int[] boardSize = {5,5};
         sg = new SnakeGame(boardSize);
-
         String expBoardString = TestUtils.getTestCase("data01.txt","e5x5");
 
         assertEquals(expBoardString,sg.getBoardString());
@@ -43,5 +49,10 @@ public class TestBoard {
         assertEquals(expBoardString,sg.getBoardString());
 
 
+    }
+
+    @Test
+    public void testThatAllGetPosDetailIsEmptyOnAnEmptyBoard(){
+        assertEquals(BLOCK.IS_EMPTY,sg.at(new int[]{0,0}));
     }
 }
