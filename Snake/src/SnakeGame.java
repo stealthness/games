@@ -11,8 +11,15 @@ public class SnakeGame {
     public String getBoardString() {
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i <5;i++){
-            sb.append("....." + System.lineSeparator());
+
+        for (int col = 0;col < boardSize[1];col++){
+            sb.append(".");
+        }
+        sb.append(System.lineSeparator());
+        String line = sb.toString();
+        sb = new StringBuilder();
+        for (int row = 0; row <boardSize[0];row++){
+            sb.append(line);
         }
         return sb.toString();
     }

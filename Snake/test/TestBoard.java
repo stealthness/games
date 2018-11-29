@@ -21,11 +21,24 @@ public class TestBoard {
         assertEquals(expBoardString,sg.getBoardString());
 
 
-    }    @Test
+    }
+
+    @Test
     public void testEmptyBoardOFSize3x5isCreatedCorrectly(){
         sg = new SnakeGame(new int[] {3,5});
 
         String expBoardString = TestUtils.getTestCase("data01.txt","e3x5");
+
+        assertEquals(expBoardString,sg.getBoardString());
+
+
+    }
+
+    @Test
+    public void testEmptyBoardOFSize4x4isCreatedCorrectly(){
+        sg = new SnakeGame(new int[] {4,4});
+
+        String expBoardString = TestUtils.getTestCase("data01.txt","e4x4");
 
         assertEquals(expBoardString,sg.getBoardString());
 
