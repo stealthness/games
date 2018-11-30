@@ -59,17 +59,43 @@ public class SnakeGame {
                 break;
             case DOWN:
                 newPos = new int[] {pos[0]-1,pos[1]};
+                if (newPos[0]<0){
+                    return;
+                }
                 break;
             case LEFT:
-                newPos = new int[] {pos[0],pos[1]-1};
+                newPos = new int[] {pos[0],pos[1]+1};
+                if (newPos[1]>=boardSize[1]){
+                    return;
+                }
                 break;
             case RIGHT:
-                newPos = new int[] {pos[0],pos[1]+1};
+                newPos = new int[] {pos[0],pos[1]-1};
+                if (newPos[1]<0){
+                    return;
+                }
                 break;
         }
         snake.set(0,newPos);
         board[pos[0]][pos[1]] = BLOCK.IS_EMPTY;
         board[newPos[0]][newPos[1]] = BLOCK.IS_SNAKE;
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (int row = boardSize[0] -1;row >= 0; row--){
+            for (int col= 0; col < boardSize[1]; col++){
+                switch (board[row][col]){
+                    case IS_SNAKE:
+                        sb.append('S');
+                        break;
+                    default: // IS_EMPTY:
+                        sb.append('.');
+                }
+            }
+            sb.append(System.lineSeparator());
+        }
+        return sb.toString();
     }
 }
 
