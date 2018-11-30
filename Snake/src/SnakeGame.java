@@ -53,6 +53,9 @@ public class SnakeGame {
         switch (direction){
             case UP:
                 newPos = new int[] {pos[0]+1,pos[1]};
+                if (newPos[0]>=boardSize[0]){
+                  return;
+                }
                 break;
             case DOWN:
                 newPos = new int[] {pos[0]-1,pos[1]};
