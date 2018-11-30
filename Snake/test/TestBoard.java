@@ -62,18 +62,35 @@ class TestBoard {
     }
 
     @Test
-    void thatSnakeCanMoveInEachDirections(){
+    void thatSnakeCanMoveInUPDirections(){
 
         sg.startSnakeAt(new int[] {2,2});
         sg.moveSnake(MOVE.UP);
-        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{1,2}));
+        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{3,2}));
+
+    }
+    @Test
+    void thatSnakeCanMoveInDOWNDirections(){
+
+        sg.startSnakeAt(new int[] {2,2});
         sg.moveSnake(MOVE.DOWN);
-        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,2}));
+        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{1,2}));
+
+    }
+    @Test
+    void thatSnakeCanMoveInRIGHTDirections(){
+
+        sg.startSnakeAt(new int[] {2,2});
+        sg.moveSnake(MOVE.RIGHT);
+        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,3}));
+
+    }
+    @Test
+    void thatSnakeCanMoveInLEFTDirections(){
+
+        sg.startSnakeAt(new int[] {2,2});
         sg.moveSnake(MOVE.LEFT);
         assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,1}));
-        sg.moveSnake(MOVE.RIGHT);
-        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,2}));
-
 
     }
 }
