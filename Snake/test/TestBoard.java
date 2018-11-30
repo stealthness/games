@@ -54,4 +54,11 @@ class TestBoard {
             }
         }
     }
+
+    @Test
+    void thatSnakePlaceAtGivenPosReturnsIS_SNAKE(){
+        sg.startSnakeAt(new int[] {0,0});
+        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{0,0}));
+
+    }
 }
