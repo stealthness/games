@@ -8,11 +8,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class TestBoard {
 
+    private static final int[] POS_0_0 = {0, 0};
+    private static final int[] POS_2_2 = {2, 2};
     private SnakeGame sg;
 
-    private final int[] SIZE_5x5 = {5,5};
-    private final int[] SIZE_3x5 = {3,5};
-    private final int[] SIZE_4x4 = {4,4};
+    private static final int[] SIZE_5x5 = {5,5};
+    private static final int[] SIZE_3x5 = {3,5};
+    private static final int[] SIZE_4x4 = {4,4};
 
 
     @BeforeEach
@@ -57,14 +59,14 @@ class TestBoard {
 
     @Test
     void thatSnakePlaceAtGivenPosReturnsIS_SNAKE(){
-        sg.startSnakeAt(new int[] {0,0});
-        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{0,0}));
+        sg.startSnakeAt(POS_0_0);
+        assertEquals(BLOCK.IS_SNAKE,sg.at(POS_0_0));
     }
 
     @Test
     void thatSnakeCanMoveInUPDirections(){
 
-        sg.startSnakeAt(new int[] {2,2});
+        sg.startSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.UP);
         assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{3,2}));
 
@@ -72,7 +74,7 @@ class TestBoard {
     @Test
     void thatSnakeCanMoveInDOWNDirections(){
 
-        sg.startSnakeAt(new int[] {2,2});
+        sg.startSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.DOWN);
         assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{1,2}));
 
@@ -80,7 +82,7 @@ class TestBoard {
     @Test
     void thatSnakeCanMoveInRIGHTDirections(){
 
-        sg.startSnakeAt(new int[] {2,2});
+        sg.startSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.RIGHT);
         assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,3}));
 
@@ -88,7 +90,7 @@ class TestBoard {
     @Test
     void thatSnakeCanMoveInLEFTDirections(){
 
-        sg.startSnakeAt(new int[] {2,2});
+        sg.startSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.LEFT);
         assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,1}));
 
