@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Created by Stephen West on 29/11/2018.
  */
-public class TestBoard {
+class TestBoard {
 
     private SnakeGame sg;
 
@@ -16,14 +16,14 @@ public class TestBoard {
 
 
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         sg = new SnakeGame(SIZE_5x5);
     }
 
 
 
     @Test
-    public void testEmptyBoardOFSize5x5isCreatedCorrectly(){
+    void testEmptyBoardOFSize5x5isCreatedCorrectly(){
         sg = new SnakeGame(SIZE_5x5);
         String expBoardString = TestUtils.getTestCase("data01.txt","e5x5");
 
@@ -33,7 +33,7 @@ public class TestBoard {
     }
 
     @Test
-    public void testEmptyBoardOFSize3x5isCreatedCorrectly(){
+    void testEmptyBoardOFSize3x5isCreatedCorrectly(){
         sg = new SnakeGame(SIZE_3x5);
         assertEquals(TestUtils.getTestCase("data01.txt","e3x5"), sg.getBoardString());
 
@@ -41,13 +41,13 @@ public class TestBoard {
     }
 
     @Test
-    public void testEmptyBoardOFSize4x4isCreatedCorrectly(){
+    void testEmptyBoardOFSize4x4isCreatedCorrectly(){
         sg = new SnakeGame(SIZE_4x4);
         assertEquals(TestUtils.getTestCase("data01.txt","e4x4"), sg.getBoardString());
     }
 
     @Test
-    public void testThatAllGetPosDetailIsEmptyOnAnEmptyBoard(){
+    void testThatAllGetPosDetailIsEmptyOnAnEmptyBoard(){
         for (int row = 0;row <SIZE_5x5[0] ;row++){
             for (int col = 0; col <SIZE_5x5[1];col++){
                 assertEquals(BLOCK.IS_EMPTY,sg.at(new int[]{row,col}));

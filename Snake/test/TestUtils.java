@@ -8,19 +8,17 @@ import java.util.Map;
 /**
  * Created by Stephen West on 29/11/2018.
  */
-public class TestUtils {
+class TestUtils {
 
     private static final String PATH = "test//";
     private static final String END = "end";
     private static final String TESTCASE = "testcase:";
 
-    public static String getTestCase(String testFile, String testCase){
-        Map<String, String> tests = readTestFile(testFile);
-        String testCaseOutput = tests.get(testCase);
-        return testCaseOutput;
+    static String getTestCase(String testFile, String testCase){
+        return readTestFile(testFile).get(testCase);
     }
 
-    public static Map<String, String> readTestFile(String testFile) {
+    static Map<String, String> readTestFile(String testFile) {
         Map<String, String> tests = new HashMap<>();
         try(BufferedReader br = new BufferedReader(new FileReader(PATH+ testFile))){
             String line;
