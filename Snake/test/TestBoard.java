@@ -85,7 +85,7 @@ class TestBoard {
 
         sg.startSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.RIGHT);
-        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,3}));
+        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,1}));
 
     }
     @Test
@@ -93,14 +93,44 @@ class TestBoard {
 
         sg.startSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.LEFT);
-        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,1}));
+        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,3}));
     }
 
     @Test
-    void theSnakeCannotMoveUpOfTheBoard(){
+    void theSnakeCannotMoveUPOfTheBoard(){
         sg.startSnakeAt(POS_4_4);
         sg.moveSnake(MOVE.UP);
         // snake must not have moved
         assertEquals(BLOCK.IS_SNAKE,sg.at(POS_4_4));
+    }
+
+    @Test
+    void theSnakeCannotMoveDOWNOfTheBoard(){
+        sg.startSnakeAt(POS_0_0);
+        sg.moveSnake(MOVE.DOWN);
+        // snake must not have moved
+        assertEquals(BLOCK.IS_SNAKE,sg.at(POS_0_0));
+    }
+
+    @Test
+    void theSnakeCannotMoveLEFTOfTheBoard(){
+        sg.startSnakeAt(POS_4_4);
+        sg.moveSnake(MOVE.LEFT);
+        // snake must not have moved
+        assertEquals(BLOCK.IS_SNAKE,sg.at(POS_4_4));
+    }
+
+    @Test
+    void theSnakeCannotMoveRIGHTOfTheBoard(){
+        sg.startSnakeAt(POS_0_0);
+        sg.moveSnake(MOVE.RIGHT);
+        // snake must not have moved
+        assertEquals(BLOCK.IS_SNAKE,sg.at(POS_0_0));
+    }
+
+    @Test
+    void testToStringOnSnakeGame(){
+        sg.startSnakeAt(POS_0_0);
+        assertEquals(TestUtils.getTestCase("data01.txt","e5x5s0_0"),sg.toString());
     }
 }

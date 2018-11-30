@@ -46,4 +46,16 @@ public class TestTextDisplay {
                          "....." + System.lineSeparator() +
                          "....." + System.lineSeparator(), TestUtils.getTestCase("data01.txt","e5x5") );
     }
+
+    @Test
+    void tesSnakeAt0_0isReadCorrectly(){
+
+        assertEquals(
+                "....." + System.lineSeparator() +
+                "....." + System.lineSeparator() +
+                "....." + System.lineSeparator() +
+                "....." + System.lineSeparator() +
+                "S...." + System.lineSeparator(), TestUtils.getTestCase("data01.txt","e5x5s0_0") );
+    }
+
 }
