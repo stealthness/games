@@ -10,6 +10,7 @@ class TestBoard {
 
     private static final int[] POS_0_0 = {0, 0};
     private static final int[] POS_2_2 = {2, 2};
+    private static final int[] POS_4_4 = {4, 4};
     private SnakeGame sg;
 
     private static final int[] SIZE_5x5 = {5,5};
@@ -93,6 +94,13 @@ class TestBoard {
         sg.startSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.LEFT);
         assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,1}));
+    }
 
+    @Test
+    void theSnakeCannotMoveUpOfTheBoard(){
+        sg.startSnakeAt(POS_4_4);
+        sg.moveSnake(MOVE.UP);
+        // snake must not have moved
+        assertEquals(BLOCK.IS_SNAKE,sg.at(POS_4_4));
     }
 }
