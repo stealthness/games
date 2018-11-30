@@ -137,15 +137,40 @@ class TestBoard {
     @Test
     void thatByDefaultPos0_0IS_WALL(){
         sg.startSnakeAt(POS_2_2);
+        sg.setHasBorderWall(true);
         assertEquals(BLOCK.IS_WALL,sg.at(POS_0_0));
+    }
+
+    @Test
+    void thatByDefaultPos4_4IS_WALL(){
+        sg.startSnakeAt(POS_2_2);
+        sg.setHasBorderWall(true);
+        System.out.println(sg.toString());
+        assertEquals(BLOCK.IS_WALL,sg.at(POS_4_4));
     }
 
     @Test
     void testThatByDefaultEdgeOFABoardIS_WALL(){
         sg.setHasBorderWall(true);
         sg.startSnakeAt(POS_2_2);
+        System.out.println(sg.toString());
         assertEquals(BLOCK.IS_WALL,sg.at(POS_0_0));
         assertEquals(BLOCK.IS_WALL,sg.at(POS_4_4));
         assertEquals(TestUtils.getTestCase("data01.txt","e5x5test01"),sg.toString());
+    }
+
+    @Test
+    void testThatIfSnakeMovesUPIntoWallItBecomesIS_DEAD(){
+        sg.setHasBorderWall(true);
+        sg.startSnakeAt(pos(3,3));
+        sg.moveSnake(MOVE.UP);
+        assertEquals(BLOCK.IS_DEAD,sg.at(pos(4,3)));
+        System.out.println(sg.toString());
+    }
+
+    // helper methods
+
+    private int[] pos(int row,int col){
+        return new int[] {row,col};
     }
 }
