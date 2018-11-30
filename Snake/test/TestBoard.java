@@ -179,6 +179,12 @@ class TestBoard {
         assertEquals(BLOCK.IS_DEAD, sg.at(initialPos));
     }
 
+    @Test
+    public void testPlacingOfAMushroomATGivenPos(){
+        sg.setMushroomAt(pos(1,1));
+        assertEquals(BLOCK.IS_MUSHROOM, sg.at(pos(1,1)));
+    }
+
 
 
 
