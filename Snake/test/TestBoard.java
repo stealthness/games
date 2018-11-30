@@ -153,13 +153,34 @@ class TestBoard {
 
     @Test
     void testThatIfSnakeMovesUPIntoWallItBecomesIS_DEAD() {
-        sg.setHasBorderWall(true);
-        sg.startSnakeAt(pos(3, 3));
-        assertEquals(TestUtils.getTestCase("data01.txt", "e5x5test02"), sg.toString());
-        sg.moveSnake(MOVE.UP);
+        testHittingWallKillsSnake(pos(3,3),MOVE.UP);
         assertEquals(TestUtils.getTestCase("data01.txt", "e5x5test03"), sg.toString());
-        assertEquals(BLOCK.IS_DEAD, sg.at(pos(3, 3)));
     }
+
+    @Test
+    void testThatIfSnakeMovesLEFTIntoWallItBecomesIS_DEAD() {
+        testHittingWallKillsSnake(pos(3,3),MOVE.LEFT);
+    }
+
+    @Test
+    void testThatIfSnakeMovesDOWNIntoWallItBecomesIS_DEAD() {
+        testHittingWallKillsSnake(pos(1,1),MOVE.DOWN);
+    }
+
+    @Test
+    void testThatIfSnakeMovesRIGHTIntoWallItBecomesIS_DEAD() {
+        testHittingWallKillsSnake(pos(1,1),MOVE.RIGHT);
+    }
+
+    private void testHittingWallKillsSnake(int[] initialPos, MOVE direction){
+        sg.setHasBorderWall(true);
+        sg.startSnakeAt(initialPos);
+        sg.moveSnake(direction);
+        assertEquals(BLOCK.IS_DEAD, sg.at(initialPos));
+    }
+
+
+
 
     // helper methods
 
