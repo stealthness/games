@@ -163,9 +163,10 @@ class TestBoard {
     void testThatIfSnakeMovesUPIntoWallItBecomesIS_DEAD(){
         sg.setHasBorderWall(true);
         sg.startSnakeAt(pos(3,3));
+        assertEquals(TestUtils.getTestCase("data01.txt","e5x5test02"),sg.toString());
         sg.moveSnake(MOVE.UP);
-        assertEquals(BLOCK.IS_DEAD,sg.at(pos(4,3)));
-        System.out.println(sg.toString());
+        assertEquals(TestUtils.getTestCase("data01.txt","e5x5test03"),sg.toString());
+        assertEquals(BLOCK.IS_DEAD,sg.at(pos(3,3)));
     }
 
     // helper methods

@@ -30,3 +30,17 @@ W.S.W
 W...W
 WWWWW
 end
+testcase:e5x5test02
+WWWWW
+W..SW
+W...W
+W...W
+WWWWW
+end
+testcase:e5x5test03
+WWWWW
+W..XW
+W...W
+W...W
+WWWWW
+end
