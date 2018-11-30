@@ -5,6 +5,7 @@ package tictactoe.tddjava;
  */
 public class TicTacToe {
 
+    private static final String NO_WINNER_MSG = "No Winner";
     private final char X = 'X';
     private final char O = 'O';
     char nextPlayer = X;
@@ -15,10 +16,39 @@ public class TicTacToe {
             {'\0', '\0', '\0'}
     };
 
-    public void play(int row, int col) {
+    public String play(int row, int col) {
         checkAxis(row);
         checkAxis(col);
         setBox(row,col);
+        checkWin(nextPlayer);
+        return NO_WINNER_MSG;
+
+    }
+
+    private boolean checkWin(char player) {
+
+        int[][][] winningLines = {
+                {{1,1},{2,1},{3,1}},
+                {{1,2},{2,2},{3,2}},
+                {{1,3},{2,3},{3,3}}};
+
+        char testPlayer = (nextPlayer()==X)?O:X;
+        boolean isWinningLine;
+
+        for (int[][] winningLine : winningLines){
+            isWinningLine = true;
+            for (int[] box : winningLine){
+                if (board[box[0]-1][box[1]-1] != testPlayer){
+                    isWinningLine = false;
+                    break;
+                }
+            }
+            if (isWinningLine) {
+                return true;
+            }
+        }
+        return false;
+
 
     }
 

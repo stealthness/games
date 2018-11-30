@@ -56,4 +56,51 @@ public class TicTacToeSpec {
         ticTacToe.play(1,1);
         assertEquals(X,ticTacToe.nextPlayer());
     }
+
+    @Test
+    public void givenEightMoveThatWillNotLeadToAWinningConditions(){
+        int[][] moves = {{2,2},{1,2},{2,3},{2,1},{1,1},{3,3},{3,1},{1,3}};
+        for (int[] move : moves){
+            assertEquals("No Winner", ticTacToe.play(move[0],move[1]));
+        }
+    }
+
+    @Test
+    public void giveAWinningHorizontalLineShouldBeAXWin(){
+
+        int[][] moves = {{2,2},{1,2},{2,3},{1,1},{2,1}};
+        for (int[] move : moves){
+            if (move[0] == 2 && move[1] == 3){
+                assertEquals("X Wins", ticTacToe.play(move[0],move[1]));
+            }else{
+                assertEquals("No Winner", ticTacToe.play(move[0],move[1]));
+            }
+        }
+
+    }
+    @Test
+
+    public void giveAWinningHVerticalLineShouldBeAXWin(){
+        int[][] moves = {{1,1},{2,2},{1,2},{2,1},{3,3},{2,3}};
+        for (int[] move : moves){
+            if (move[0] == 2 && move[1]==3){
+                assertEquals("O Wins", ticTacToe.play(move[0],move[1]));
+            }else{
+                assertEquals("No Winner", ticTacToe.play(move[0],move[1]));
+            }
+
+        }
+    }
+
+    @Test
+    public void giveAWinningDiagonalLineShouldBeAXWin(){
+        int[][] moves = {{2,2},{1,2},{1,1},{1,3},{3,3}};
+        for (int[] move : moves){
+            if (move[0] == 3 && move[1]== 3){
+                assertEquals("X Wins", ticTacToe.play(move[0],move[1]));
+            }else{
+                assertEquals("No Winner", ticTacToe.play(move[0],move[1]));
+            }
+        }
+    }
 }

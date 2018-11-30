@@ -3,10 +3,19 @@
  */
 public class SnakeGame {
     private final int[] boardSize;
+    BLOCK board[][] ;
 
     public SnakeGame(int[] boardSize) {
         this.boardSize = boardSize;
+        board = new BLOCK[boardSize[0]][boardSize[1]];
+        for (int row = 0; row < boardSize[0]; row++){
+            for (int col= 0; col < boardSize[1]; col++){
+            board[row][col] = BLOCK.IS_EMPTY;
+            }
+        }
     }
+
+
 
     public String getBoardString() {
 
@@ -23,4 +32,12 @@ public class SnakeGame {
         }
         return sb.toString();
     }
+
+    public BLOCK at(int[] pos) {
+        return board[pos[0]][pos[1]];
+    }
+}
+
+enum BLOCK {
+    IS_EMPTY  // IS_WALL,IS_SNAKE
 }
