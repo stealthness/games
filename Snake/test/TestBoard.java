@@ -133,4 +133,19 @@ class TestBoard {
         sg.startSnakeAt(POS_0_0);
         assertEquals(TestUtils.getTestCase("data01.txt","e5x5s0_0"),sg.toString());
     }
+
+    @Test
+    void thatByDefaultPos0_0IS_WALL(){
+        sg.startSnakeAt(POS_2_2);
+        assertEquals(BLOCK.IS_WALL,sg.at(POS_0_0));
+    }
+
+    @Test
+    void testThatByDefaultEdgeOFABoardIS_WALL(){
+        sg.setHasBorderWall(true);
+        sg.startSnakeAt(POS_2_2);
+        assertEquals(BLOCK.IS_WALL,sg.at(POS_0_0));
+        assertEquals(BLOCK.IS_WALL,sg.at(POS_4_4));
+        assertEquals(TestUtils.getTestCase("data01.txt","e5x5test01"),sg.toString());
+    }
 }

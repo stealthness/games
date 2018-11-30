@@ -23,3 +23,10 @@ testcase:e5x5s0_0
 .....
 S....
 end
+testcase:e5x5test01
+WWWWW
+W...W
+W.S.W
+W...W
+WWWWW
+end
