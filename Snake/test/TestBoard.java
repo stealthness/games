@@ -13,165 +13,157 @@ class TestBoard {
     private static final int[] POS_4_4 = {4, 4};
     private SnakeGame sg;
 
-    private static final int[] SIZE_5x5 = {5,5};
-    private static final int[] SIZE_3x5 = {3,5};
-    private static final int[] SIZE_4x4 = {4,4};
+    private static final int[] SIZE_5x5 = {5, 5};
+    private static final int[] SIZE_3x5 = {3, 5};
+    private static final int[] SIZE_4x4 = {4, 4};
 
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         sg = new SnakeGame(SIZE_5x5);
     }
 
 
-
     @Test
-    void testEmptyBoardOFSize5x5isCreatedCorrectly(){
+    void testEmptyBoardOFSize5x5isCreatedCorrectly() {
         sg = new SnakeGame(SIZE_5x5);
-        String expBoardString = TestUtils.getTestCase("data01.txt","e5x5");
-
-        assertEquals(expBoardString,sg.getBoardString());
-
-
+        String expBoardString = TestUtils.getTestCase("data01.txt", "e5x5");
+        assertEquals(expBoardString, sg.getBoardString());
     }
 
     @Test
-    void testEmptyBoardOFSize3x5isCreatedCorrectly(){
+    void testEmptyBoardOFSize3x5isCreatedCorrectly() {
         sg = new SnakeGame(SIZE_3x5);
-        assertEquals(TestUtils.getTestCase("data01.txt","e3x5"), sg.getBoardString());
-
-
+        assertEquals(TestUtils.getTestCase("data01.txt", "e3x5"), sg.getBoardString());
     }
 
     @Test
-    void testEmptyBoardOFSize4x4isCreatedCorrectly(){
+    void testEmptyBoardOFSize4x4isCreatedCorrectly() {
         sg = new SnakeGame(SIZE_4x4);
-        assertEquals(TestUtils.getTestCase("data01.txt","e4x4"), sg.getBoardString());
+        assertEquals(TestUtils.getTestCase("data01.txt", "e4x4"), sg.getBoardString());
     }
 
     @Test
-    void testThatAllGetPosDetailIsEmptyOnAnEmptyBoard(){
-        for (int row = 0;row <SIZE_5x5[0] ;row++){
-            for (int col = 0; col <SIZE_5x5[1];col++){
-                assertEquals(BLOCK.IS_EMPTY,sg.at(new int[]{row,col}));
+    void testThatAllGetPosDetailIsEmptyOnAnEmptyBoard() {
+        for (int row = 0; row < SIZE_5x5[0]; row++) {
+            for (int col = 0; col < SIZE_5x5[1]; col++) {
+                assertEquals(BLOCK.IS_EMPTY, sg.at(new int[]{row, col}));
             }
         }
     }
 
     @Test
-    void thatSnakePlaceAtGivenPosReturnsIS_SNAKE(){
+    void thatSnakePlaceAtGivenPosReturnsIS_SNAKE() {
         sg.startSnakeAt(POS_0_0);
-        assertEquals(BLOCK.IS_SNAKE,sg.at(POS_0_0));
+        assertEquals(BLOCK.IS_SNAKE, sg.at(POS_0_0));
     }
 
     @Test
-    void thatSnakeCanMoveInUPDirections(){
+    void thatSnakeCanMoveInUPDirections() {
 
         sg.startSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.UP);
-        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{3,2}));
-
+        assertEquals(BLOCK.IS_SNAKE, sg.at(pos(3, 2)));
     }
+
     @Test
-    void thatSnakeCanMoveInDOWNDirections(){
+    void thatSnakeCanMoveInDOWNDirections() {
 
         sg.startSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.DOWN);
-        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{1,2}));
-
+        assertEquals(BLOCK.IS_SNAKE, sg.at(pos(1, 2)));
     }
-    @Test
-    void thatSnakeCanMoveInRIGHTDirections(){
 
+    @Test
+    void thatSnakeCanMoveInRIGHTDirections() {
         sg.startSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.RIGHT);
-        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,1}));
-
+        assertEquals(BLOCK.IS_SNAKE, sg.at(pos(2, 1)));
     }
-    @Test
-    void thatSnakeCanMoveInLEFTDirections(){
 
+    @Test
+    void thatSnakeCanMoveInLEFTDirections() {
         sg.startSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.LEFT);
-        assertEquals(BLOCK.IS_SNAKE,sg.at(new int[]{2,3}));
+        assertEquals(BLOCK.IS_SNAKE, sg.at(pos(2, 3)));
     }
 
     @Test
-    void theSnakeCannotMoveUPOfTheBoard(){
+    void theSnakeCannotMoveUPOfTheBoard() {
         sg.startSnakeAt(POS_4_4);
         sg.moveSnake(MOVE.UP);
         // snake must not have moved
-        assertEquals(BLOCK.IS_SNAKE,sg.at(POS_4_4));
+        assertEquals(BLOCK.IS_SNAKE, sg.at(POS_4_4));
     }
 
     @Test
-    void theSnakeCannotMoveDOWNOfTheBoard(){
+    void theSnakeCannotMoveDOWNOfTheBoard() {
         sg.startSnakeAt(POS_0_0);
         sg.moveSnake(MOVE.DOWN);
         // snake must not have moved
-        assertEquals(BLOCK.IS_SNAKE,sg.at(POS_0_0));
+        assertEquals(BLOCK.IS_SNAKE, sg.at(POS_0_0));
     }
 
     @Test
-    void theSnakeCannotMoveLEFTOfTheBoard(){
+    void theSnakeCannotMoveLEFTOfTheBoard() {
         sg.startSnakeAt(POS_4_4);
         sg.moveSnake(MOVE.LEFT);
         // snake must not have moved
-        assertEquals(BLOCK.IS_SNAKE,sg.at(POS_4_4));
+        assertEquals(BLOCK.IS_SNAKE, sg.at(POS_4_4));
     }
 
     @Test
-    void theSnakeCannotMoveRIGHTOfTheBoard(){
+    void theSnakeCannotMoveRIGHTOfTheBoard() {
         sg.startSnakeAt(POS_0_0);
         sg.moveSnake(MOVE.RIGHT);
         // snake must not have moved
-        assertEquals(BLOCK.IS_SNAKE,sg.at(POS_0_0));
+        assertEquals(BLOCK.IS_SNAKE, sg.at(POS_0_0));
     }
 
     @Test
-    void testToStringOnSnakeGame(){
+    void testToStringOnSnakeGame() {
         sg.startSnakeAt(POS_0_0);
-        assertEquals(TestUtils.getTestCase("data01.txt","e5x5s0_0"),sg.toString());
+        assertEquals(TestUtils.getTestCase("data01.txt", "e5x5s0_0"), sg.toString());
     }
 
     @Test
-    void thatByDefaultPos0_0IS_WALL(){
+    void thatByDefaultPos0_0IS_WALL() {
         sg.startSnakeAt(POS_2_2);
         sg.setHasBorderWall(true);
-        assertEquals(BLOCK.IS_WALL,sg.at(POS_0_0));
+        assertEquals(BLOCK.IS_WALL, sg.at(POS_0_0));
     }
 
     @Test
-    void thatByDefaultPos4_4IS_WALL(){
+    void thatByDefaultPos4_4IS_WALL() {
         sg.startSnakeAt(POS_2_2);
         sg.setHasBorderWall(true);
         System.out.println(sg.toString());
-        assertEquals(BLOCK.IS_WALL,sg.at(POS_4_4));
+        assertEquals(BLOCK.IS_WALL, sg.at(POS_4_4));
     }
 
     @Test
-    void testThatByDefaultEdgeOFABoardIS_WALL(){
+    void testThatByDefaultEdgeOFABoardIS_WALL() {
         sg.setHasBorderWall(true);
         sg.startSnakeAt(POS_2_2);
         System.out.println(sg.toString());
-        assertEquals(BLOCK.IS_WALL,sg.at(POS_0_0));
-        assertEquals(BLOCK.IS_WALL,sg.at(POS_4_4));
-        assertEquals(TestUtils.getTestCase("data01.txt","e5x5test01"),sg.toString());
+        assertEquals(BLOCK.IS_WALL, sg.at(POS_0_0));
+        assertEquals(BLOCK.IS_WALL, sg.at(POS_4_4));
+        assertEquals(TestUtils.getTestCase("data01.txt", "e5x5test01"), sg.toString());
     }
 
     @Test
-    void testThatIfSnakeMovesUPIntoWallItBecomesIS_DEAD(){
+    void testThatIfSnakeMovesUPIntoWallItBecomesIS_DEAD() {
         sg.setHasBorderWall(true);
-        sg.startSnakeAt(pos(3,3));
-        assertEquals(TestUtils.getTestCase("data01.txt","e5x5test02"),sg.toString());
+        sg.startSnakeAt(pos(3, 3));
+        assertEquals(TestUtils.getTestCase("data01.txt", "e5x5test02"), sg.toString());
         sg.moveSnake(MOVE.UP);
-        assertEquals(TestUtils.getTestCase("data01.txt","e5x5test03"),sg.toString());
-        assertEquals(BLOCK.IS_DEAD,sg.at(pos(3,3)));
+        assertEquals(TestUtils.getTestCase("data01.txt", "e5x5test03"), sg.toString());
+        assertEquals(BLOCK.IS_DEAD, sg.at(pos(3, 3)));
     }
 
     // helper methods
 
-    private int[] pos(int row,int col){
-        return new int[] {row,col};
+    private int[] pos(int row, int col) {
+        return new int[]{row, col};
     }
 }
