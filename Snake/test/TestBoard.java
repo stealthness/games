@@ -185,6 +185,12 @@ class TestBoard {
         assertEquals(BLOCK.IS_MUSHROOM, sg.at(pos(1,1)));
     }
 
+    @Test void testPlacingOfMushroomOnWallFails(){
+        sg.setHasBorderWall(true);
+        sg.setMushroomAt(pos(1,1));
+        assertEquals(BLOCK.IS_WALL, sg.at(pos(0,0)));
+    }
+
 
 
 
