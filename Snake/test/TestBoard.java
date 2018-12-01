@@ -202,25 +202,13 @@ class TestBoard {
 
     @Test
     void testMovingSnakeHeadUPOnAMushroomIncreaseSnakesSizeBy1(){
-        sg.setSnakeAt(POS_2_2);
-        sg.setMushroomAt(pos(3,2));
-        sg.moveSnake(MOVE.UP);
-        assertEquals(BLOCK.IS_SNAKE, sg.at(POS_2_2));
-        assertEquals(BLOCK.IS_SNAKE, sg.at(pos(3,2)));
+        testSnakeEatingMushrooms(POS_2_2, MOVE.UP);
 
     }
 
     @Test
     void testMovingSnakeHeadLEFTOnAMushroomIncreaseSnakesSizeBy1(){
-        sg.setSnakeAt(POS_2_2);
-        sg.setMushroomAt(pos(2,3));
-
-        System.out.println(sg.toString());
-        sg.moveSnake(MOVE.LEFT);
-        assertEquals(BLOCK.IS_SNAKE, sg.at(POS_2_2));
-        assertEquals(BLOCK.IS_SNAKE, sg.at(pos(2,3)));
-
-        System.out.println(sg.toString());
+        testSnakeEatingMushrooms(POS_2_2, MOVE.LEFT);
     }
 
     @Test
