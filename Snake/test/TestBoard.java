@@ -137,7 +137,6 @@ class TestBoard {
     void thatByDefaultPos4_4IS_WALL() {
         sg.setSnakeAt(POS_2_2);
         sg.setHasBorderWall(true);
-        System.out.println(sg.toString());
         assertEquals(BLOCK.IS_WALL, sg.at(POS_4_4));
     }
 
@@ -145,7 +144,6 @@ class TestBoard {
     void testThatByDefaultEdgeOFABoardIS_WALL() {
         sg.setHasBorderWall(true);
         sg.setSnakeAt(POS_2_2);
-        System.out.println(sg.toString());
         assertEquals(BLOCK.IS_WALL, sg.at(POS_0_0));
         assertEquals(BLOCK.IS_WALL, sg.at(POS_4_4));
         assertEquals(TestUtils.getTestCase("data01.txt", "e5x5test01"), sg.toString());
@@ -185,20 +183,68 @@ class TestBoard {
         assertEquals(BLOCK.IS_MUSHROOM, sg.at(pos(1,1)));
     }
 
-    @Test void testPlacingOfMushroomOnWallFails(){
+    @Test
+    void testPlacingOfMushroomOnWallFails(){
         sg.setHasBorderWall(true);
         int[] pos = pos(0,0);
         sg.setMushroomAt(pos);
         assertEquals(BLOCK.IS_WALL, sg.at(pos));
     }
 
-    @Test void testPlacingOfMushroomOnSnakeFails(){
+    @Test
+    void testPlacingOfMushroomOnSnakeFails(){
         sg.setHasBorderWall(true);
         int[] pos = pos(1,1);
         sg.setSnakeAt(pos);
         sg.setMushroomAt(pos);
         assertEquals(BLOCK.IS_SNAKE, sg.at(pos));
     }
+
+    @Test
+    void testMovingSnakeHeadUPOnAMushroomIncreaseSnakesSizeBy1(){
+        sg.setSnakeAt(POS_2_2);
+        sg.setMushroomAt(pos(3,2));
+        sg.moveSnake(MOVE.UP);
+        assertEquals(BLOCK.IS_SNAKE, sg.at(POS_2_2));
+        assertEquals(BLOCK.IS_SNAKE, sg.at(pos(3,2)));
+
+    }
+
+    @Test
+    void testMovingSnakeHeadLEFTOnAMushroomIncreaseSnakesSizeBy1(){
+        sg.setSnakeAt(POS_2_2);
+        sg.setMushroomAt(pos(2,3));
+
+        System.out.println(sg.toString());
+        sg.moveSnake(MOVE.LEFT);
+        assertEquals(BLOCK.IS_SNAKE, sg.at(POS_2_2));
+        assertEquals(BLOCK.IS_SNAKE, sg.at(pos(2,3)));
+
+        System.out.println(sg.toString());
+    }
+
+    @Test
+    void testMovingSnakeHeadRIGHTOnAMushroomIncreaseSnakesSizeBy1(){
+        testSnakeEatingMushrooms(POS_2_2, MOVE.RIGHT);
+    }
+
+    @Test
+    void testMovingSnakeHeadDOWNOnAMushroomIncreaseSnakesSizeBy1(){
+        testSnakeEatingMushrooms(POS_2_2, MOVE.RIGHT);
+    }
+
+    private void testSnakeEatingMushrooms(int[] pos, MOVE direction){
+        int[] adjPos = sg.getAdjacentPos(pos,direction);
+        sg.setSnakeAt(pos);
+        sg.setMushroomAt(adjPos);
+        sg.moveSnake(direction);
+        assertEquals(BLOCK.IS_SNAKE, sg.at(pos));
+        assertEquals(BLOCK.IS_SNAKE, sg.at(adjPos));
+    }
+
+ /*   private void testEatingMushroom(){
+
+    }*/
 
 
 
