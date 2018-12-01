@@ -58,4 +58,15 @@ public class TestTextDisplay {
                 "S...." + System.lineSeparator(), TestUtils.getTestCase("data01.txt","e5x5s0_0") );
     }
 
+    @Test
+    void tesMushroomAt0_0isReadCorrectly(){
+
+        assertEquals(
+                "....." + System.lineSeparator() +
+                        "....." + System.lineSeparator() +
+                        "....." + System.lineSeparator() +
+                        "....." + System.lineSeparator() +
+                        "M...." + System.lineSeparator(), TestUtils.getTestCase("data01.txt","e5x5m0_0") );
+    }
+
 }

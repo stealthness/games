@@ -229,6 +229,31 @@ class TestBoard {
         assertEquals(BLOCK.IS_SNAKE, sg.at(pos));
         assertEquals(BLOCK.IS_SNAKE, sg.at(adjPos));
     }
+    
+    
+    @Test
+    void testMovingInUPDirectionWithSnakeThatIsOfLenghTwoAfterEatingMushroom(){
+        testSnakeEatingMushroomAndMovingInSameDirection(POS_0_0,MOVE.UP);
+    }
+
+    private void testSnakeEatingMushroomAndMovingInSameDirection(int[] pos, MOVE direction) {
+        int[] adjPos = sg.getAdjacentPos(pos,direction);
+        int[] nextAdjPos = sg.getAdjacentPos(adjPos,direction);
+        sg.setSnakeAt(pos);
+        sg.setMushroomAt(adjPos);
+
+        assertEquals(TestUtils.getTestCase("data01.txt", "e5x5test04"), sg.toString());
+        sg.moveSnake(direction);
+        System.out.println(sg.toString());
+        sg.moveSnake(direction);
+        System.out.println(sg.toString());
+        assertEquals(BLOCK.IS_EMPTY, sg.at(adjPos));
+        assertEquals(BLOCK.IS_SNAKE, sg.at(adjPos));
+        assertEquals(BLOCK.IS_SNAKE, sg.at(nextAdjPos));
+        assertEquals(TestUtils.getTestCase("data01.txt", "e5x5test05"), sg.toString());
+
+
+    }
 
  /*   private void testEatingMushroom(){
 
