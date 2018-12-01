@@ -3,6 +3,8 @@ import java.util.List;
 
 /**
  * Created by Stephen West on 29/11/2018.
+ *
+ * Is java based game
  */
 public class SnakeGame {
     private final int[] boardSize;
@@ -18,6 +20,10 @@ public class SnakeGame {
         initializeEmptyBoard(boardSize);
     }
 
+    /**
+     * Iniatializes an empty board
+     * @param boardSize is the given size of the board.
+     */
     private void initializeEmptyBoard(int[] boardSize) {
         for (int row = 0; row < boardSize[0]; row++){
             for (int col= 0; col < boardSize[1]; col++){
@@ -26,7 +32,10 @@ public class SnakeGame {
         }
     }
 
-
+    /**
+     * Converts the board into a String representation
+     * @return
+     */
     public String getBoardString() {
 
         StringBuilder sb = new StringBuilder();
@@ -52,6 +61,12 @@ public class SnakeGame {
         board[pos[0]][pos[1]] = BLOCK.IS_SNAKE;
     }
 
+    /**
+     * Returns that BLOCK value of the adjacent box in the given direction
+     * @param pos current position of Box
+     * @param direction direction of the adjacent box interested in
+     * @return value of the adjacent box
+     */
     private BLOCK getAdjacentBox(int[] pos, MOVE direction){
         switch (direction){
             case UP:
@@ -74,7 +89,10 @@ public class SnakeGame {
         return at(getAdjacentPos(pos, direction));
     }
 
-
+    /**
+     * Moves the head of the snake in the given direction
+     * @param direction is the direction that the head of the snake will move to
+     */
     public void moveSnake(MOVE direction) {
         int[] pos = snake.get(0);
         int[] newPos;
@@ -94,6 +112,12 @@ public class SnakeGame {
         board[newPos[0]][newPos[1]] = BLOCK.IS_SNAKE;
     }
 
+    /**
+     * Returns tha position of a box adjacent to position of the given box in the given direction
+     * @param pos is the given position
+     * @param direction is the direction to find the position of the adjacent box
+     * @return returns the position of the adjacent box in the given direction
+     */
     private int[] getAdjacentPos(int[] pos,MOVE direction) {
         int[] newPos;
         switch (direction){
@@ -117,6 +141,9 @@ public class SnakeGame {
 
     // Overriding
 
+    /**
+     * To string me
+     */
     public String toString(){
         StringBuilder sb = new StringBuilder();
         for (int row = boardSize[0] -1;row >= 0; row--){
