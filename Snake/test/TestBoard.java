@@ -187,8 +187,17 @@ class TestBoard {
 
     @Test void testPlacingOfMushroomOnWallFails(){
         sg.setHasBorderWall(true);
-        sg.setMushroomAt(pos(0,0));
-        assertEquals(BLOCK.IS_WALL, sg.at(pos(0,0)));
+        int[] pos = pos(0,0);
+        sg.setMushroomAt(pos);
+        assertEquals(BLOCK.IS_WALL, sg.at(pos));
+    }
+
+    @Test void testPlacingOfMushroomOnSnakeFails(){
+        sg.setHasBorderWall(true);
+        int[] pos = pos(1,1);
+        sg.startSnakeAt(pos);
+        sg.setMushroomAt(pos);
+        assertEquals(BLOCK.IS_SNAKE, sg.at(pos));
     }
 
 
