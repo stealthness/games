@@ -19,6 +19,7 @@ class PigDice {
 		}
 
 		// Game starts
+		print("Welcome to Pig Dice")
 		while (!gameOver) {
 			def nextPlayer = false
 			String ln
