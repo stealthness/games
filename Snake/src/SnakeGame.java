@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Stephen West on 29/11/2018.
@@ -8,14 +7,15 @@ import java.util.List;
  */
 public class SnakeGame {
     private final int[] boardSize;
-    List<int[]> snake;
+    Deque<int[]> snake;
+
     BLOCK board[][] ;
     boolean hasBorderWall = false;
 
 
     public SnakeGame(int[] boardSize) {
         this.boardSize = boardSize;
-        snake = new ArrayList<>();
+        snake = new LinkedList<>();
         board = new BLOCK[boardSize[0]][boardSize[1]];
         initializeEmptyBoard(boardSize);
     }
@@ -94,22 +94,28 @@ public class SnakeGame {
      * @param direction is the direction that the head of the snake will move to
      */
     public void moveSnake(MOVE direction) {
-        int[] pos = snake.get(0);
+        int[] pos = snake.peek();
         int[] newPos;
         switch (getAdjacentBox(pos,direction)){
             case IS_EMPTY:
+                newPos = getAdjacentPos(pos, direction);
+                int[] snakeTailPos = snake.pollLast();
+                board[snakeTailPos[0]][snakeTailPos[1]] = BLOCK.IS_EMPTY;
+                snake.addFirst(newPos);
+                board[newPos[0]][newPos[1]] = BLOCK.IS_SNAKE;
                 break;
             case IS_WALL:
                 board[pos[0]][pos[1]] = BLOCK.IS_DEAD;
                 return;
+            case IS_MUSHROOM:
+                newPos = getAdjacentPos(pos, direction);
+                snake.addFirst(newPos);
+                board[newPos[0]][newPos[1]] = BLOCK.IS_SNAKE;
             case IS_OUT_OF_BOUNDS:
             default: // is null
                 return;
         }
-        newPos = getAdjacentPos(pos, direction);
-        snake.set(0,newPos);
-        board[pos[0]][pos[1]] = BLOCK.IS_EMPTY;
-        board[newPos[0]][newPos[1]] = BLOCK.IS_SNAKE;
+
     }
 
     /**
@@ -118,7 +124,7 @@ public class SnakeGame {
      * @param direction is the direction to find the position of the adjacent box
      * @return returns the position of the adjacent box in the given direction
      */
-    private int[] getAdjacentPos(int[] pos,MOVE direction) {
+    int[] getAdjacentPos(int[] pos,MOVE direction) {
         int[] newPos;
         switch (direction){
             case UP:
@@ -158,6 +164,9 @@ public class SnakeGame {
                     case IS_DEAD:
                         sb.append('X');
                         break;
+                    case IS_MUSHROOM:
+                        sb.append('M');
+                        break;
                     default: // IS_EMPTY:
                         sb.append('.');
                 }
@@ -176,6 +185,9 @@ public class SnakeGame {
         }
     }
 
+    /**
+     * Sets all of the Border Boxes as walls
+     */
     private void setBorderWall() {
         for (int row = 0;row <boardSize[0];row++){
             if (row == 0 || row == boardSize[0]-1) {
@@ -189,13 +201,19 @@ public class SnakeGame {
         }
     }
 
+    /**
+     * Sets a Mushroom at position pos
+     * @param pos
+     */
     public void setMushroomAt(int[] pos) {
         if (board[pos[0]][pos[1]] == BLOCK.IS_EMPTY){
             board[pos[0]][pos[1]] = BLOCK.IS_MUSHROOM;
         }
+    }
 
 
-
+    public BLOCK[][] getBoard() {
+        return board;
     }
 
 }

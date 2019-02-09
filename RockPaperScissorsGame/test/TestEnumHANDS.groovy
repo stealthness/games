@@ -1,6 +1,5 @@
-import static org.junit.Assert.*;
-
-import org.junit.*;
+import org.junit.Before
+import org.junit.Test
 
 class TestEnumHANDS extends GroovyTestCase{
 	
@@ -10,8 +9,18 @@ class TestEnumHANDS extends GroovyTestCase{
 	}
 	
 	@Test
-	void testToString(){
-		assertEquals("Rock",HANDS.ROCK)
+	void testThatHANDSdotROCKtoString(){
+		assertEquals("Rock",HANDS.ROCK.toString())
 	}
+
+    @Test
+    void testThatHANDSdotPAPERtoString(){
+        assertEquals("Paper",HANDS.PAPER.toString())
+    }
+
+    @Test
+    void testThatHNADSdotSCISSORStoString(){
+        assertEquals("Scissors",HANDS.SCISSORS.toString())
+    }
 
 }

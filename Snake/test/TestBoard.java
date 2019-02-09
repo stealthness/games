@@ -64,6 +64,10 @@ class TestBoard {
         sg.setSnakeAt(POS_2_2);
         sg.moveSnake(MOVE.UP);
         assertEquals(BLOCK.IS_SNAKE, sg.at(pos(3, 2)));
+        sg = new SnakeGame(new int[]{5,5});
+        sg.setSnakeAt(pos(0,0));
+        sg.moveSnake(MOVE.UP);
+        assertEquals(BLOCK.IS_SNAKE, sg.at(pos(1, 0)));
     }
 
     @Test

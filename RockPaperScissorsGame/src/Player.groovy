@@ -2,7 +2,7 @@ class Player {
 
 	String name
 	boolean isHuman
-	def scores = Integer[3][3]
+	//def scores = Integer[3][3]
 	
 	Player(name,isHuman){
 		this.name = name
@@ -11,11 +11,11 @@ class Player {
 	}
 	
 	private void setZero(){
-		scores.each{row->
-			row.each {score->
-				score = 0
-			}
-		}
+//		scores.each{row->
+//			row.each {score->
+//				score = 0
+//			}
+//		}
 	}
 
 }

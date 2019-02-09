@@ -2,6 +2,6 @@ package res;
 
 public enum ORDER {
 	
-	FORWARD, BACKWARD ,LEFT, RIGHT, TURN;
+	FORWARD, BACKWARD ,LEFT, RIGHT, TURN
 
 }
