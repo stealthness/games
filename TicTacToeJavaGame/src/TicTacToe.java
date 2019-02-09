@@ -1,35 +1,24 @@
-
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class TicTacToe {
 	
 	private static final char n = R.n;
-	
+    static BufferedReader br;
+
 	private Player player1;
 	private Player player2;
 	private static Display display;
 	Board board;
 
-	
-	static BufferedReader br;
+
 
 	
 	
-	public static void main(String[] args) {
+	public static void main(String...args) {
 		System.out.println("start");
 		TicTacToe now = new TicTacToe();
-		if (args != null){
-			System.out.println(args[0]);
-			// set number of AI players to args[1]
-			now.setMatch(Integer.parseInt(args[0]));
-		} else{
-			// set to 2 player
-			now.setMatch(0);
-		}
-
-
+        now.startMatch();
 	}
 
 
@@ -47,20 +36,22 @@ public class TicTacToe {
 				this.player1 = new Player(1, R.player1Name, true, R.player1Mark);
 				this.player2 = new Player(2, R.player2Name, true, R.player2Mark);
 		}
-
-		startGame();
 	}
+
+
 
 	/**
 	 * Starts a single match
 	 */
 	public void startMatch() {
-//
-//		br = new BufferedReader(new InputStreamReader(System.in));
-//		display = new Display(System.out);
-//		if (antherGame(R.StartQuestion) == n ) {
-//			return;
-//		}
+	    setMatch(0);
+
+		br = new BufferedReader(new InputStreamReader(System.in));
+		display = new Display(System.out);
+
+		if (antherGame(R.StartQuestion) == n ) {
+			return;
+		}
 
 		board = new Board(player1,player2);
 		
@@ -163,8 +154,8 @@ public class TicTacToe {
 		display.out(R.playerMove);
 		int move = -1;
         String line="";
-
-        while (move == -1) {System.out.println("< >");
+        System.out.println("< >");
+        while (move == -1) {
             try {
                 line = br.readLine();
             } catch (Exception e) {
