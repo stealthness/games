@@ -28,8 +28,8 @@ public class core.TicTacToe
 	private final int playingid=3;
 	private String movesPlayer;
 	private byte override;
-	private char[][] overridegrid=/{/{'o','o','o'},{'o','o','o'},{'o','o','o'/}/};
-	private char[][] numpad=/{/{'7','8','9'},{'4','5','6'},{'1','2','3'/}/};
+	private char[][] overridegrid=\{\{'o','o','o'},{'o','o','o'},{'o','o','o'\}\};
+	private char[][] numpad=\{\{'7','8','9'},{'4','5','6'},{'1','2','3'\}\};
 	private Hashtable<Integer,Integer> crossbank;
 	private Hashtable<Integer,Integer> knotbank;
  
