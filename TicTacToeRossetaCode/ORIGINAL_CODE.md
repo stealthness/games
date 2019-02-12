@@ -139,7 +139,7 @@ public class core.TicTacToe
 				{9,5,1}
 		};
 		weights=new int[]{3,2,3,2,4,2,3,2,3};
-		grid=new char[][]{{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
+		grid=new char[][]{ ' ',' ',' ' , ' ',' ',' ' , ' ',' ',' ' }; // remove {} to get github page to build
 		crossbank=new Hashtable<Integer,Integer>();
 		knotbank=new Hashtable<Integer,Integer>();
 	}
