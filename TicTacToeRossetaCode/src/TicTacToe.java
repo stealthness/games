@@ -50,10 +50,11 @@ public class TicTacToe {
         int compscore = 0;
         do {
             int result = startGame();
-            if (result == playerid)
+            if (result == playerid) {
                 playerscore++;
-            else if (result == compid)
+            } else if (result == compid) {
                 compscore++;
+            }
             System.out.println("Score: Player-" + playerscore + " AI-" + compscore);
             System.out.print("Another?(y/n):");
             try {
@@ -112,8 +113,9 @@ public class TicTacToe {
                 return;
         }
         char mark = 'x';
-        if (player == 0)
+        if (player == 0) {
             mark = 'o';
+        }
         grid[i][j] = mark;
         display(grid);
     }
@@ -129,8 +131,9 @@ public class TicTacToe {
                 return playerid;
             }
             status = checkForWin();
-            if (status != playingid)
+            if (status != playingid) {
                 break;
+            }
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
@@ -164,36 +167,45 @@ public class TicTacToe {
     }
 
     private void mark(int m, int player) {
-        for (int i = 0; i < wins.length; i++)
-            for (int j = 0; j < wins[i].length; j++)
+        for (int i = 0; i < wins.length; i++) {
+            for (int j = 0; j < wins[i].length; j++) {
                 if (wins[i][j] == m) {
                     marks[i][j] = 1;
-                    if (player == playerid)
+                    if (player == playerid) {
                         marks[i][knotcount]++;
-                    else
+                    } else {
                         marks[i][crosscount]++;
+                    }
                     marks[i][totalcount]++;
                 }
+            }
+        }
     }
 
     private void fixWeights() {
-        for (int i = 0; i < 3; i++)
-            for (int j = 0; j < 3; j++)
-                if (marks[i][j] == 1)
-                    if (weights[wins[i][j] - 1] != Integer.MIN_VALUE)
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (marks[i][j] == 1) {
+                    if (weights[wins[i][j] - 1] != Integer.MIN_VALUE) {
                         weights[wins[i][j] - 1] = Integer.MIN_VALUE;
+                    }
+                }
+            }
+        }
 
         for (int i = 0; i < 8; i++) {
-            if (marks[i][totalcount] != 2)
+            if (marks[i][totalcount] != 2) {
                 continue;
+            }
             if (marks[i][crosscount] == 2) {
                 int p = i, q = -1;
-                if (marks[i][0] == 0)
+                if (marks[i][0] == 0) {
                     q = 0;
-                else if (marks[i][1] == 0)
+                } else if (marks[i][1] == 0) {
                     q = 1;
-                else if (marks[i][2] == 0)
+                } else if (marks[i][2] == 0) {
                     q = 2;
+                }
 
                 if (weights[wins[p][q] - 1] != Integer.MIN_VALUE) {
                     weights[wins[p][q] - 1] = 6;
@@ -201,12 +213,13 @@ public class TicTacToe {
             }
             if (marks[i][knotcount] == 2) {
                 int p = i, q = -1;
-                if (marks[i][0] == 0)
+                if (marks[i][0] == 0) {
                     q = 0;
-                else if (marks[i][1] == 0)
+                } else if (marks[i][1] == 0) {
                     q = 1;
-                else if (marks[i][2] == 0)
+                } else if (marks[i][2] == 0) {
                     q = 2;
+                }
 
                 if (weights[wins[p][q] - 1] != Integer.MIN_VALUE) {
                     weights[wins[p][q] - 1] = 5;
@@ -225,25 +238,27 @@ public class TicTacToe {
     private int move() {
         int max = Integer.MIN_VALUE;
         int cell = 0;
-        for (int i = 0; i < weights.length; i++)
+        for (int i = 0; i < weights.length; i++) {
             if (weights[i] > max) {
                 max = weights[i];
                 cell = i + 1;
             }
+        }
 
         //This section ensures the computer never loses
         //Remove it for a fair match
         //Dirty kluge
-        if (movesPlayer.equals("76") || movesPlayer.equals("67"))
+        if (movesPlayer.equals("76") || movesPlayer.equals("67")) {
             cell = 9;
-        else if (movesPlayer.equals("92") || movesPlayer.equals("29"))
+        } else if (movesPlayer.equals("92") || movesPlayer.equals("29")) {
             cell = 3;
-        else if (movesPlayer.equals("18") || movesPlayer.equals("81"))
+        } else if (movesPlayer.equals("18") || movesPlayer.equals("81")) {
             cell = 7;
-        else if (movesPlayer.equals("73") || movesPlayer.equals("37"))
+        } else if (movesPlayer.equals("73") || movesPlayer.equals("37")) {
             cell = 4 * ((int) (Math.random() * 2) + 1);
-        else if (movesPlayer.equals("19") || movesPlayer.equals("91"))
+        } else if (movesPlayer.equals("19") || movesPlayer.equals("91")) {
             cell = 4 + 2 * (int) (Math.pow(-1, (int) (Math.random() * 2)));
+        }
 
         mark(cell, 1);
         fixWeights();
@@ -266,10 +281,11 @@ public class TicTacToe {
                 override = 1;
                 return -1;
             }
-            if ((cell < 1 || cell > 9) || weights[cell - 1] == Integer.MIN_VALUE)
+            if ((cell < 1 || cell > 9) || weights[cell - 1] == Integer.MIN_VALUE) {
                 System.out.print("Invalid move. Try again:");
-            else
+            } else {
                 okay = 1;
+            }
         }
         playerMoved(cell);
         System.out.println();
@@ -286,18 +302,22 @@ public class TicTacToe {
     private int checkForWin() {
         int crossflag = 0, knotflag = 0;
         for (int i = 0; i < wins.length; i++) {
-            if (crossbank.containsKey(wins[i][0]))
-                if (crossbank.containsKey(wins[i][1]))
+            if (crossbank.containsKey(wins[i][0])) {
+                if (crossbank.containsKey(wins[i][1])) {
                     if (crossbank.containsKey(wins[i][2])) {
                         crossflag = 1;
                         break;
                     }
-            if (knotbank.containsKey(wins[i][0]))
-                if (knotbank.containsKey(wins[i][1]))
+                }
+            }
+            if (knotbank.containsKey(wins[i][0])) {
+                if (knotbank.containsKey(wins[i][1])) {
                     if (knotbank.containsKey(wins[i][2])) {
                         knotflag = 1;
                         break;
                     }
+                }
+            }
         }
         if (knotflag == 1) {
             display(grid);
@@ -309,9 +329,11 @@ public class TicTacToe {
             return compid;
         }
 
-        for (int i = 0; i < weights.length; i++)
-            if (weights[i] != Integer.MIN_VALUE)
+        for (int i = 0; i < weights.length; i++) {
+            if (weights[i] != Integer.MIN_VALUE) {
                 return playingid;
+            }
+        }
         System.out.println("Truce");
 
         return truceid;
@@ -321,8 +343,9 @@ public class TicTacToe {
         for (int i = 0; i < 3; i++) {
             System.out.println("\n-------");
             System.out.print("|");
-            for (int j = 0; j < 3; j++)
+            for (int j = 0; j < 3; j++) {
                 System.out.print(grid[i][j] + "|");
+            }
         }
         System.out.println("\n-------");
     }
