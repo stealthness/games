@@ -7,11 +7,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Hashtable;
  
-public class TicTacToe
+public class core.TicTacToe
 {
 	public static void main(String[] args)
 	{
-		TicTacToe now=new TicTacToe();
+		core.TicTacToe now=new core.TicTacToe();
 		now.startMatch();
 	}
  

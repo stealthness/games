@@ -1,3 +1,4 @@
+package core;
 /**
  * Created by Stephen West on 12/02/2019.
  */
@@ -5,15 +6,13 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Hashtable;
+import java.util.Map;
 
 public class TicTacToe {
-    public static void main(String[] args) {
-        TicTacToe now = new TicTacToe();
-        now.startMatch();
-    }
+
 
     private int[][] marks;
-    private int[][] wins;
+    private int[][] winLineCombs;
     private int[] weights;
     private char[][] grid;
     private final int knotcount = 3;
@@ -27,11 +26,18 @@ public class TicTacToe {
     private byte override;
     private char[][] overridegrid = {{'o', 'o', 'o'}, {'o', 'o', 'o'}, {'o', 'o', 'o'}};
     private char[][] numpad = {{'7', '8', '9'}, {'4', '5', '6'}, {'1', '2', '3'}};
-    private Hashtable<Integer, Integer> crossbank;
-    private Hashtable<Integer, Integer> knotbank;
+    private Map<Integer, Integer> crossbank;
+    private Map<Integer, Integer> knotbank;
+
+
+    public static void main(String[] args) {
+        final TicTacToe now = new TicTacToe();
+        now.startMatch();
+    }
+
 
     public void startMatch() {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Start?(y/n):");
         char choice = 'y';
         try {
@@ -49,7 +55,7 @@ public class TicTacToe {
         int playerscore = 0;
         int compscore = 0;
         do {
-            int result = startGame();
+            final int result = startGame();
             if (result == playerid) {
                 playerscore++;
             } else if (result == compid) {
@@ -68,45 +74,44 @@ public class TicTacToe {
         System.out.println("Game over.");
     }
 
-    private void put(int cell, int player) {
-        int i = -1, j = -1;
-        ;
+    private void put(final int cell, final int player) {
+        int row = -1, col = -1;
         switch (cell) {
             case 1:
-                i = 2;
-                j = 0;
+                row = 2;
+                col = 0;
                 break;
             case 2:
-                i = 2;
-                j = 1;
+                row = 2;
+                col = 1;
                 break;
             case 3:
-                i = 2;
-                j = 2;
+                row = 2;
+                col = 2;
                 break;
             case 4:
-                i = 1;
-                j = 0;
+                row = 1;
+                col = 0;
                 break;
             case 5:
-                i = 1;
-                j = 1;
+                row = 1;
+                col = 1;
                 break;
             case 6:
-                i = 1;
-                j = 2;
+                row = 1;
+                col = 2;
                 break;
             case 7:
-                i = 0;
-                j = 0;
+                row = 0;
+                col = 0;
                 break;
             case 8:
-                i = 0;
-                j = 1;
+                row = 0;
+                col = 1;
                 break;
             case 9:
-                i = 0;
-                j = 2;
+                row = 0;
+                col = 2;
                 break;
             default:
                 display(overridegrid);
@@ -116,7 +121,7 @@ public class TicTacToe {
         if (player == 0) {
             mark = 'o';
         }
-        grid[i][j] = mark;
+        grid[row][col] = mark;
         display(grid);
     }
 
@@ -149,7 +154,7 @@ public class TicTacToe {
         movesPlayer = "";
         override = 0;
         marks = new int[8][6];
-        wins = new int[][]    //new int[8][3];
+        winLineCombs = new int[][]    //new int[8][3];
                 {
                         {7, 8, 9},
                         {4, 5, 6},
@@ -166,10 +171,10 @@ public class TicTacToe {
         knotbank = new Hashtable<Integer, Integer>();
     }
 
-    private void mark(int m, int player) {
-        for (int i = 0; i < wins.length; i++) {
-            for (int j = 0; j < wins[i].length; j++) {
-                if (wins[i][j] == m) {
+    private void mark(final int m, final int player) {
+        for (int i = 0; i < winLineCombs.length; i++) {
+            for (int j = 0; j < winLineCombs[i].length; j++) {
+                if (winLineCombs[i][j] == m) {
                     marks[i][j] = 1;
                     if (player == playerid) {
                         marks[i][knotcount]++;
@@ -186,8 +191,8 @@ public class TicTacToe {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 if (marks[i][j] == 1) {
-                    if (weights[wins[i][j] - 1] != Integer.MIN_VALUE) {
-                        weights[wins[i][j] - 1] = Integer.MIN_VALUE;
+                    if (weights[winLineCombs[i][j] - 1] != Integer.MIN_VALUE) {
+                        weights[winLineCombs[i][j] - 1] = Integer.MIN_VALUE;
                     }
                 }
             }
@@ -198,7 +203,8 @@ public class TicTacToe {
                 continue;
             }
             if (marks[i][crosscount] == 2) {
-                int p = i, q = -1;
+                final int p = i;
+                int q = -1;
                 if (marks[i][0] == 0) {
                     q = 0;
                 } else if (marks[i][1] == 0) {
@@ -207,12 +213,13 @@ public class TicTacToe {
                     q = 2;
                 }
 
-                if (weights[wins[p][q] - 1] != Integer.MIN_VALUE) {
-                    weights[wins[p][q] - 1] = 6;
+                if (weights[winLineCombs[p][q] - 1] != Integer.MIN_VALUE) {
+                    weights[winLineCombs[p][q] - 1] = 6;
                 }
             }
             if (marks[i][knotcount] == 2) {
-                int p = i, q = -1;
+                final int p = i;
+                int q = -1;
                 if (marks[i][0] == 0) {
                     q = 0;
                 } else if (marks[i][1] == 0) {
@@ -221,15 +228,15 @@ public class TicTacToe {
                     q = 2;
                 }
 
-                if (weights[wins[p][q] - 1] != Integer.MIN_VALUE) {
-                    weights[wins[p][q] - 1] = 5;
+                if (weights[winLineCombs[p][q] - 1] != Integer.MIN_VALUE) {
+                    weights[winLineCombs[p][q] - 1] = 5;
                 }
             }
         }
     }
 
     private int compMove() {
-        int cell = move();
+        final int cell = move();
         System.out.println("Computer plays: " + cell);
         //weights[cell-1]=Integer.MIN_VALUE;
         return cell;
@@ -268,7 +275,7 @@ public class TicTacToe {
 
     private int playerMove() {
         System.out.print("What's your move?: ");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));//NOPMD
         int cell = 0;
         int okay = 0;
         while (okay == 0) {
@@ -277,11 +284,12 @@ public class TicTacToe {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            if (cell == 7494) {
+            // override needs explaining
+            if (cell == 666) {
                 override = 1;
                 return -1;
             }
-            if ((cell < 1 || cell > 9) || weights[cell - 1] == Integer.MIN_VALUE) {
+            if (cell < 1 || cell > 9 || weights[cell - 1] == Integer.MIN_VALUE) {
                 System.out.print("Invalid move. Try again:");
             } else {
                 okay = 1;
@@ -292,7 +300,7 @@ public class TicTacToe {
         return cell;
     }
 
-    private void playerMoved(int cell) {
+    private void playerMoved(final int cell) {
         movesPlayer += cell;
         mark(cell, 0);
         fixWeights();
@@ -300,30 +308,33 @@ public class TicTacToe {
     }
 
     private int checkForWin() {
-        int crossflag = 0, knotflag = 0;
-        for (int i = 0; i < wins.length; i++) {
-            if (crossbank.containsKey(wins[i][0])) {
-                if (crossbank.containsKey(wins[i][1])) {
-                    if (crossbank.containsKey(wins[i][2])) {
-                        crossflag = 1;
-                        break;
-                    }
-                }
+        // these should be boolean
+
+        boolean crossHasWon = false, knotHasWon = false;
+
+
+        for (int[] winLineComb : winLineCombs) {
+            if (crossbank.containsKey(winLineComb[0])
+                    && crossbank.containsKey(winLineComb[0])
+                    && crossbank.containsKey(winLineComb[0])) {
+                crossHasWon = true;
+                break;
+
             }
-            if (knotbank.containsKey(wins[i][0])) {
-                if (knotbank.containsKey(wins[i][1])) {
-                    if (knotbank.containsKey(wins[i][2])) {
-                        knotflag = 1;
+            if (knotbank.containsKey(winLineComb[0])) {
+                if (knotbank.containsKey(winLineComb[1])) {
+                    if (knotbank.containsKey(winLineComb[2])) {
+                        knotHasWon = true;
                         break;
                     }
                 }
             }
         }
-        if (knotflag == 1) {
+        if (knotHasWon) {
             display(grid);
             System.out.println("O wins.");
             return playerid;
-        } else if (crossflag == 1) {
+        } else if (crossHasWon) {
             display(grid);
             System.out.println("X wins.");
             return compid;
@@ -339,7 +350,7 @@ public class TicTacToe {
         return truceid;
     }
 
-    private void display(char[][] grid) {
+    private void display(final char[][] grid) {
         for (int i = 0; i < 3; i++) {
             System.out.println("\n-------");
             System.out.print("|");
