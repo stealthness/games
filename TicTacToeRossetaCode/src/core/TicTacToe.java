@@ -38,20 +38,20 @@ public class TicTacToe {
 
     public void startMatch() {
         final BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Start?(y/n):");
+        GameRendere.println("Start?(y/n):");
         char choice = 'y';
         try {
             choice = br.readLine().charAt(0);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            GameRendere.println(e.getMessage());
         }
         if (choice == 'n' || choice == 'N') {
             return;
         }
 
-        System.out.println("Use a standard numpad as an entry grid, as so:\n ");
+        GameRendere.println("Use a standard numpad as an entry grid, as so:\n ");
         display(numpad);
-        System.out.println("Begin");
+        GameRendere.println("Begin");
         int playerscore = 0;
         int compscore = 0;
         do {
@@ -61,21 +61,22 @@ public class TicTacToe {
             } else if (result == compid) {
                 compscore++;
             }
-            System.out.println("Score: Player-" + playerscore + " AI-" + compscore);
-            System.out.print("Another?(y/n):");
+            GameRendere.println("Score: Player-" + playerscore + " AI-" + compscore);
+            GameRendere.println("Another?(y/n):");
             try {
                 choice = br.readLine().charAt(0);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                GameRendere.println(e.getMessage());
             }
 
         } while (choice != 'n' || choice == 'N');
 
-        System.out.println("Game over.");
+        GameRendere.println("Game over.");
     }
 
     private void put(final int cell, final int player) {
-        int row = -1, col = -1;
+        int row = -1;
+        int col = -1;
         switch (cell) {
             case 1:
                 row = 2;
@@ -132,7 +133,7 @@ public class TicTacToe {
         while (status == playingid) {
             put(playerMove(), 0);
             if (override == 1) {
-                System.out.println("O wins.");
+                GameRendere.println("O wins.");
                 return playerid;
             }
             status = checkForWin();
@@ -142,7 +143,7 @@ public class TicTacToe {
             try {
                 Thread.sleep(1000);
             } catch (Exception e) {
-                System.out.print(e.getMessage());
+                GameRendere.println(e.getMessage());
             }
             put(compMove(), 1);
             status = checkForWin();
@@ -237,7 +238,7 @@ public class TicTacToe {
 
     private int compMove() {
         final int cell = move();
-        System.out.println("Computer plays: " + cell);
+        GameRendere.println("Computer plays: " + cell);
         //weights[cell-1]=Integer.MIN_VALUE;
         return cell;
     }
@@ -255,17 +256,19 @@ public class TicTacToe {
         //This section ensures the computer never loses
         //Remove it for a fair match
         //Dirty kluge
-        if (movesPlayer.equals("76") || movesPlayer.equals("67")) {
+        if ("76".equals(movesPlayer) || "67".equals(movesPlayer)) {
             cell = 9;
-        } else if (movesPlayer.equals("92") || movesPlayer.equals("29")) {
+        } else if ("92".equals(movesPlayer) || "29".equals(movesPlayer)) {
             cell = 3;
-        } else if (movesPlayer.equals("18") || movesPlayer.equals("81")) {
+        } else if ("18".equals(movesPlayer) || "81".equals(movesPlayer)) {
             cell = 7;
-        } else if (movesPlayer.equals("73") || movesPlayer.equals("37")) {
+        } else if ("73".equals(movesPlayer) || "37".equals(movesPlayer)) {
             cell = 4 * ((int) (Math.random() * 2) + 1);
-        } else if (movesPlayer.equals("19") || movesPlayer.equals("91")) {
+        } else if ("19".equals(movesPlayer) || "91".equals(movesPlayer)) {
             cell = 4 + 2 * (int) (Math.pow(-1, (int) (Math.random() * 2)));
         }
+
+
 
         mark(cell, 1);
         fixWeights();
@@ -274,7 +277,7 @@ public class TicTacToe {
     }
 
     private int playerMove() {
-        System.out.print("What's your move?: ");
+        GameRendere.println("What's your move?: ");
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));//NOPMD
         int cell = 0;
         int okay = 0;
@@ -282,7 +285,7 @@ public class TicTacToe {
             try {
                 cell = Integer.parseInt(br.readLine());
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                GameRendere.println(e.getMessage());
             }
             // override needs explaining
             if (cell == 666) {
@@ -290,13 +293,13 @@ public class TicTacToe {
                 return -1;
             }
             if (cell < 1 || cell > 9 || weights[cell - 1] == Integer.MIN_VALUE) {
-                System.out.print("Invalid move. Try again:");
+                GameRendere.println("Invalid move. Try again:");
             } else {
                 okay = 1;
             }
         }
         playerMoved(cell);
-        System.out.println();
+        GameRendere.println("");
         return cell;
     }
 
@@ -310,7 +313,8 @@ public class TicTacToe {
     private int checkForWin() {
         // these should be boolean
 
-        boolean crossHasWon = false, knotHasWon = false;
+        boolean crossHasWon = false;
+        boolean knotHasWon = false;
 
 
         for (int[] winLineComb : winLineCombs) {
@@ -332,32 +336,41 @@ public class TicTacToe {
         }
         if (knotHasWon) {
             display(grid);
-            System.out.println("O wins.");
+            GameRendere.println("O wins.");
             return playerid;
         } else if (crossHasWon) {
             display(grid);
-            System.out.println("X wins.");
+            GameRendere.println("X wins.");
             return compid;
         }
 
-        for (int i = 0; i < weights.length; i++) {
-            if (weights[i] != Integer.MIN_VALUE) {
+
+        for (int weight : weights) {
+            if (weight != Integer.MIN_VALUE) {
                 return playingid;
             }
         }
-        System.out.println("Truce");
+        GameRendere.println("Truce");
 
         return truceid;
     }
 
-    private void display(final char[][] grid) {
+    private void display(char[]...grid) {
         for (int i = 0; i < 3; i++) {
-            System.out.println("\n-------");
-            System.out.print("|");
+            GameRendere.println("\n-------");
+            GameRendere.println("|");
             for (int j = 0; j < 3; j++) {
-                System.out.print(grid[i][j] + "|");
+                GameRendere.println(grid[i][j] + "|");
             }
         }
-        System.out.println("\n-------");
+        GameRendere.println("\n-------");
+    }
+}
+
+class GameRendere{
+
+
+    public static void println(String message){
+        System.out.print(message);
     }
 }
