@@ -28,8 +28,8 @@ public class core.TicTacToe
 	private final int playingid=3;
 	private String movesPlayer;
 	private byte override;
-	private char[][] overridegrid={{'o','o','o'},{'o','o','o'},{'o','o','o'}};
-	private char[][] numpad={{'7','8','9'},{'4','5','6'},{'1','2','3'}};
+	private char[][] overridegrid = {  'o','o','o'  ,  'o','o','o'  ,  'o','o','o' }; // remove {} to get github page to build
+	private char[][] numpad = {  '7','8','9' ,  '4','5','6' , '1','2','3'  }; // remove {} to get github page to build
 	private Hashtable<Integer,Integer> crossbank;
 	private Hashtable<Integer,Integer> knotbank;
  
@@ -139,7 +139,7 @@ public class core.TicTacToe
 				{9,5,1}
 		};
 		weights=new int[]{3,2,3,2,4,2,3,2,3};
-		grid=new char[][]{{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}};
+		grid=new char[][]{ ' ',' ',' ' , ' ',' ',' ' , ' ',' ',' ' }; // remove {} to get github page to build
 		crossbank=new Hashtable<Integer,Integer>();
 		knotbank=new Hashtable<Integer,Integer>();
 	}
