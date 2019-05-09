@@ -1,19 +1,11 @@
 package base;
 
-import res.R;
 import base.tile.GoalTile;
 import base.tile.SolidTile;
 import base.tile.Tile;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+import res.R;
+
+import java.awt.*;
 
 public class Game extends Application{
 

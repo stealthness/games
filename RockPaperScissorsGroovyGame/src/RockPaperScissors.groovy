@@ -34,8 +34,6 @@ class RockPaperScissors {
         createPlayers()
         while (continuePlaying){
 
-
-
             continuePlaying = false
         }
         println(r.goodbye)
